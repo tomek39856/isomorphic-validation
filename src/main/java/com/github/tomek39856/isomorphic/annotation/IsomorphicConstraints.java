@@ -1,6 +1,6 @@
 package com.github.tomek39856.isomorphic.annotation;
 
-import com.github.tomek39856.isomorphic.validator.IsomorphicValidator;
+import com.github.tomek39856.isomorphic.validator.IsomorphicConstraintsValidator;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
@@ -10,15 +10,14 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Created by Tomek on 2016-12-17.
+ * Created by Tomek on 2016-12-21.
  */
-@Target({ ElementType.METHOD, ElementType.FIELD })
 @Retention(RetentionPolicy.RUNTIME)
-@Constraint(validatedBy = IsomorphicValidator.class)
-public @interface IsomorphicValidate {
+@Target({ ElementType.METHOD, ElementType.FIELD, ElementType.ANNOTATION_TYPE })
+@Constraint(validatedBy = IsomorphicConstraintsValidator.class)
+public @interface IsomorphicConstraints {
+    IsomorphicConstraint[] value();
     String message() default "{isomorphic.validator.default}";
-    String[] jsMethods();
-    String jsFile();
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 }

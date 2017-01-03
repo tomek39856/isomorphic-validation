@@ -1,7 +1,13 @@
-function validateString(test) {
-     return test == "correctValue";
+function validateLengthMin(test) {
+     if(test == null) {
+        return true;
+     }
+     return test.length>5;
 }
 
-function notNull(test) {
-    return test != null;
+function validateLengthMax(test) {
+     if(test == null) {
+        return true;
+     }
+     return test.length<10;
 }

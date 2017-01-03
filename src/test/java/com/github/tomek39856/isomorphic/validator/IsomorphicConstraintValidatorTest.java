@@ -1,6 +1,6 @@
 package com.github.tomek39856.isomorphic.validator;
 
-import com.github.tomek39856.isomorphic.annotation.IsomorphicValidate;
+import com.github.tomek39856.isomorphic.validator.data.ObjectToValidate;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -15,7 +15,7 @@ import static org.junit.Assert.*;
 /**
  * Created by Tomek on 2016-12-18.
  */
-public class IsomorphicValidatorTest {
+public class IsomorphicConstraintValidatorTest {
     private Validator validator;
 
     @Before
@@ -27,7 +27,7 @@ public class IsomorphicValidatorTest {
     @Test
     public void shouldPassForCorrectValues() {
         //given:
-        ObjectToValidate objectToValidate = new ObjectToValidate("correctValue");
+        ObjectToValidate objectToValidate = new ObjectToValidate("correct", "correct", 4);
 
         //when:
         Set<ConstraintViolation<ObjectToValidate>> constraintViolations = validator.validate(objectToValidate);
@@ -39,7 +39,7 @@ public class IsomorphicValidatorTest {
     @Test
     public void shouldFailForIncorrectValue() {
         //given:
-        ObjectToValidate objectToValidate = new ObjectToValidate("incorrectValue");
+        ObjectToValidate objectToValidate = new ObjectToValidate("test", "correct", 4);
 
         //when:
         Set<ConstraintViolation<ObjectToValidate>> constraintViolations = validator.validate(objectToValidate);
@@ -51,12 +51,24 @@ public class IsomorphicValidatorTest {
     @Test
     public void shouldFailForIncorrectValuesAndReturnCorrectNumberOfViolations() {
         //given:
-        ObjectToValidate objectToValidate = new ObjectToValidate(null);
+        ObjectToValidate objectToValidate = new ObjectToValidate("tooLongValue", null, 4);
 
         //when:
         Set<ConstraintViolation<ObjectToValidate>> constraintViolations = validator.validate(objectToValidate);
 
         //then:
         assertEquals(2, constraintViolations.size());
+    }
+
+    @Test
+    public void shouldPassForIncorrectNumericValue() {
+        //given:
+        ObjectToValidate objectToValidate = new ObjectToValidate("correct", "correct", 1);
+
+        //when:
+        Set<ConstraintViolation<ObjectToValidate>> constraintViolations = validator.validate(objectToValidate);
+
+        //then:
+        assertEquals(1, constraintViolations.size());
     }
 }
