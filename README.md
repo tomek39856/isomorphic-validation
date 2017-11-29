@@ -1,6 +1,6 @@
 # Isomorphic Validator
 
-JSR-303 compatibile validator that allows to create JavaScript based validators with the same logic for backend and frontend.
+JSR-303 compatibile validator that allows to create JavaScript based validation rules with the same logic for backend and frontend.
 
 ## Usage examples
 
