@@ -27,15 +27,14 @@ function validateLengthMax(test) {
 ```
 
 
-Annotate your entity properties with @IsomorphicConstraint and disable default validation rules by adding @Constraint(validatedBy = {}):
+Annotate your entity properties with @IsomorphicConstraint:
 
 ```
-@Constraint(validatedBy = {})
 @IsomorphicConstraint(jsFilePath = "testValidator.js", jsMethods = {"validateLengthMin", "validateLengthMax"})
 private String fieldToTest;
 ```
 
-It's also possible to use multiple @IsomorphicConstraint annotations on sinsgle field. For examples please check project unit tests.
+It's also possible to use multiple @IsomorphicConstraint annotations on single field. For examples please check project unit tests.
 
 ## Prerequisites
 
